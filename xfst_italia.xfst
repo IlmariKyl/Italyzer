@@ -1,0 +1,22 @@
+clear stack
+
+read lexc italian_verbs.lexc
+define Lexicon ;
+regex Lexicon ;
+
+define AllButI [ a | à | e | é | o | ò | u | ù | b | c | d | f | g | h | l | m | n | p | q | r | s | t | v | w | x | z ] ;
+
+! Rule for irregular verbs that drop 'i' in some tenses
+define IDeletion I -> 0 || _ $[i a m o],
+						   _ $[e r [ ò | a i | à | e m o | e t e | a n n o]],
+						   _ $[e r e [ i | s t i | b b e | m m o | s t e | b b e r o ]] ;
+						   
+define Itoi I -> i ;
+
+! To prevent consecutive i's
+define iDeletion i -> 0 || _ ~$[AllButI] & $[i] ;
+
+! For -ire and -isc verbs, absolute past 1Sg forms end with "ii"
+define QToi Q -> i ;
+
+regex Lexicon .o. IDeletion .o. Itoi .o. iDeletion .o. QToi ;
