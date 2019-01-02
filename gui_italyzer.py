@@ -1,6 +1,8 @@
 from wordsuggester import WordSuggester
 import hfst, libhfst, re, time, translator
 from tkinter import *
+import tkinter.font
+
 
 def loadTransducer():
     try:
@@ -20,15 +22,22 @@ def loadTransducer():
 
 class Application(Frame):
     def __init__(self,master=None):
-        Frame.__init__(self,master,height=470,width=600,bg='snow')
+        Frame.__init__(self,master,height=500,width=700,bg='snow')
         if(master):
-            master.title('Italian verb analyzer')
+            master.title('Italyzer')
+
+        self.output_font = tkinter.font.Font(family="newspaper", size=12)
+        myFont = tkinter.font.Font(family="fangsong ti")
+        text.configure(font=myFont)
+
         self.pack_propagate(0)
         self.word = ""
         self.pack()
         self.createWidgets()
         self.transducer = loadTransducer()
         self.suggestions = False
+
+        
            
     def set_output(self, elts):
         self.OUTPUT.delete(0,END)
@@ -58,13 +67,14 @@ class Application(Frame):
 
     def createWidgets(self):
         # Instruction text
-        self.LABEL = Label(self, font=('Arial',10))
+        self.LABEL = Label(self)#, font=('Times',12, 'bold'))
         self.LABEL['text']='Enter an Italian verb form:'
         self.LABEL['fg']='black'
+        self.LABEL['bg']='white'
         self.LABEL.pack(side=TOP)
         
         # Text box for user input
-        self.TEXT = Entry(self, font=('Helvetica', 12))
+        self.TEXT = Entry(self, font=('Times',12, 'bold'))
         self.TEXT['width'] = 30
         self.TEXT['fg'] ='black'
         self.TEXT.pack(side=TOP)
@@ -72,7 +82,7 @@ class Application(Frame):
         self.TEXT.focus()
 
         # 'Clear text' button
-        self.CLEAR_BUTTON = Button(self, text="Clear text", command=self.clear_text, font=(12))
+        self.CLEAR_BUTTON = Button(self, text="Clear text", command=self.clear_text, font=('Times',12, 'bold'))
         self.CLEAR_BUTTON['bg'] = 'RosyBrown1'
         self.CLEAR_BUTTON.pack()
         
@@ -81,10 +91,11 @@ class Application(Frame):
         output_frame = Frame(self)
         scrollx = Scrollbar(output_frame,orient=HORIZONTAL)
         scrolly = Scrollbar(output_frame)
-        self.OUTPUT = Listbox(output_frame,height=15,width=55, background='white', \
+        self.OUTPUT = Listbox(output_frame,height=15,width=65, background='white', \
                     yscrollcommand=scrolly.set, xscrollcommand=scrollx.set, \
-                    selectmode=BROWSE, font = ('Arial',12))
+                    selectmode=BROWSE, font=('Times',11, 'bold'))
         self.OUTPUT['height'] = 15
+        self.OUTPUT['width'] = 60
         self.OUTPUT.bind('<<ListboxSelect>>', self.onselect)
         self.OUTPUT['bg'] = 'snow'
         self.OUTPUT.pack(side=BOTTOM)
@@ -92,7 +103,7 @@ class Application(Frame):
         output_frame.pack(side=BOTTOM)
 
         # 'Recognize' button
-        self.RECOGNIZE = Button(self, font=12)
+        self.RECOGNIZE = Button(self, font=('Times',12, 'bold'))
         self.RECOGNIZE['text']='Analyze'
         self.RECOGNIZE['bg']='PaleGreen1'
         self.RECOGNIZE['command']=lambda :self.press_recognize_button()
@@ -155,5 +166,7 @@ if __name__=='__main__':
     epsilon = '@_EPSILON_SYMBOL_@'
     wordsuggester = WordSuggester()
     root = Tk()
+    text = Text(root)
+
     app = Application(master=root)
     app.mainloop()

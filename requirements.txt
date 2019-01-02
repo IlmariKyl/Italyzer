@@ -1,0 +1,3 @@
+tkinter
+hfst
+bs4

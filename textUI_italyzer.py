@@ -42,7 +42,7 @@ def main():
                         options.append((count+1, form))
                         print('{:2d}) {}'.format(count+1, form))
 
-                choose = input('\nEnter a number or press enter to continue: ')
+                choose = input('\nEnter a number or press enter to input another verb form: ')
 
                 for option in sorted(options):
                     if str(choose) == str(option[0]):
@@ -57,6 +57,7 @@ def main():
             for form_list in td.lookup(usinput).values():
                 for  form in form_list:
                     print(form[0].replace(epsilon, '') , '  -  ', translator.translate(form[0].split('+')[1]))
+                    print()
 
 
 main()
