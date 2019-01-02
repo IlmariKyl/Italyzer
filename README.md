@@ -1,10 +1,10 @@
 # Italyzer: Analyzer for Italian verbs
 
 ### Table of Contents
-  * [Requirements](##Requirements)  
-  * [Introduction](##Introduction)  
-  * [Analyzer](##Analyzer)  
-  * [User interfaces](##User%interfaces)
+  * [Requirements](#Requirements)  
+  * [Introduction](#Introduction)  
+  * [Analyzer](#Analyzer)  
+  * [User interfaces](#User-interfaces)
 
 ## Requirements
 
@@ -27,7 +27,7 @@ After the root lexicon, each of the four conjugations have their own lexicons fo
 Hundreds of the verbs are irregular or at least semi-irregular. The semi-irregular verbs (e.g. the ones that are irregular only in the absolute past tense) are handled by [flag-diacritics](http://giellatekno.uit.no/doc/lang/sme/docu-sme-flag-diacritics.html). For example, the stem of a verb that is irregular only in participle past forms, is marked with a `@P.IRREG_PTCPL.PAST@` flag-diacritic to block the path that leads to the regular participle past endings. Instead, the irregular participle past forms are stored in their own lexicon. Using a [list] 
 (https://it.wikipedia.org/wiki/Verbi_irregolari_italiani) from Wikipedia I was able to divide some of the irregular verbs into groups that are inflected in the same way. But in many cases when a verb is highly irregular, most of the forms are written separately and grouping is not possible.
 
-## User interfaces
+## User interfaces <a name="User-interfaces"></a>
 There are two user interfaces, a **text-based** and a **graphical**.  
 <br/>
 <img align="left" width="400" src="images/textui.png">
