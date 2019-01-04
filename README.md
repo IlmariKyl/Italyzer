@@ -33,7 +33,7 @@ There are two user interfaces, a **text-based** and a **graphical**.
 <img align="right" width="400"  src="images/gui.png">  
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 Usage:  
-TextUI:`python textui_italyzer.py`  
+TextUI: `python textui_italyzer.py`  
 GUI: `python gui_italyzer.py`  
 
 They are both made with Python and they use the [HFST Python API](https://pypi.org/project/hfst/). The UIs take a verb form as input and attempt to call the transducer. If recognition succeeds, the proper parse is shown in the output (or output box in the GUI).

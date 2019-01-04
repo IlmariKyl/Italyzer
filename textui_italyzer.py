@@ -10,9 +10,9 @@ def LoadTransducer():
             transducers.append(istr.read())
         istr.close()
         td = hfst.HfstBasicTransducer(transducers[1])
-        
+
         return td
-    
+
     except:
         print('Transducer file was not found or invalid.')
         sys.exit()
@@ -21,16 +21,16 @@ def main():
     epsilon = '@_EPSILON_SYMBOL_@'
     wordsuggester = WordSuggester()
     td = LoadTransducer()
-    
-    while True:        
+
+    while True:
         usinput = input('Input a verb form: ')
         print()
-        
+
         if usinput == '':
             break
         if len(td.lookup(usinput)) == 0 or not wordsuggester.word_in_lexicon(usinput):
             print('Verb form not found.')
-            
+
             # Check if any suggestions, longer than 2 characters, are found
             if len(wordsuggester.suggestions(usinput)) > 1 and len(usinput) > 2:
                 options = []
@@ -57,10 +57,7 @@ def main():
             for form_list in td.lookup(usinput).values():
                 for  form in form_list:
                     print(form[0].replace(epsilon, '') , '  -  ', translator.translate(form[0].split('+')[1]))
-                    print()
+                print()
 
 
 main()
-            
-
-    
